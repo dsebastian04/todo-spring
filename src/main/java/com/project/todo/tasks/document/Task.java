@@ -1,8 +1,7 @@
 package com.project.todo.tasks.document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.project.todo.tasks.params.State;
-import org.springframework.beans.factory.annotation.Value;
+import com.project.todo.tasks.params.TaskState;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
@@ -21,10 +20,10 @@ public class Task {
     private String todo;
 
     /**
-     * State of the task
+     * TaskState of the task
      * Active, Finish
      */
-    private State state;
+    private TaskState state;
 
     /**
      * Creation Date of the task
@@ -60,11 +59,11 @@ public class Task {
         this.todo = todo;
     }
 
-    public State getState() {
+    public TaskState getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public void setState(TaskState state) {
         this.state = state;
     }
 

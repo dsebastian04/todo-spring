@@ -1,13 +1,14 @@
 package com.project.todo.tasks.service.serviceImpl;
 
 import com.project.todo.tasks.document.Task;
-import com.project.todo.tasks.params.State;
+import com.project.todo.tasks.params.TaskState;
 import com.project.todo.tasks.repository.TaskRepository;
 import com.project.todo.tasks.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class TaskService implements ITaskService {
@@ -25,13 +26,13 @@ public class TaskService implements ITaskService {
         Task task = taskRepository.findOne(id);
         if (task != null) {
             if (task.getState() != null) {
-                if (task.getState().equals(State.Active)) {
-                    task.setState(State.Finish);
+                if (task.getState().equals(TaskState.Active)) {
+                    task.setState(TaskState.Finish);
                 } else {
-                    task.setState(State.Active);
+                    task.setState(TaskState.Active);
                 }
             } else {
-                task.setState(State.Active);
+                task.setState(TaskState.Active);
             }
 
             task.setDateModify(LocalDate.now());
@@ -51,6 +52,11 @@ public class TaskService implements ITaskService {
             task.setDateModify(LocalDate.now());
             taskRepository.save(lTask);
         }
+    }
+
+    @Override
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll();
     }
 
     public void setTaskRepository(TaskRepository taskRepository) {

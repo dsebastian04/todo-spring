@@ -2,6 +2,8 @@ package com.project.todo.tasks.service;
 
 import com.project.todo.tasks.document.Task;
 
+import java.util.List;
+
 
 public interface ITaskService {
 
@@ -11,4 +13,6 @@ public interface ITaskService {
     void switchStatus(String id);
 
     void modifyToDO( Task task, String id);
+
+    List<Task> getAllTasks();
 }

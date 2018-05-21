@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class TaskRest implements ITaskRest {
 
@@ -27,6 +29,11 @@ public class TaskRest implements ITaskRest {
     @Override
     public void modifyToDO(@RequestBody Task task,@PathVariable String id) {
         taskService.modifyToDO(task, id);
+    }
+
+    @Override
+    public List<Task> getAllTasks() {
+        return taskService.getAllTasks();
     }
 
     public void setTaskService(TaskService taskService) {
