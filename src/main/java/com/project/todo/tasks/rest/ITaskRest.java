@@ -20,4 +20,6 @@ public interface ITaskRest {
     @GetMapping
     List<Task> getAllTasks();
 
+    @GetMapping(path = "/{id}")
+    Task findByIdTask(@PathVariable String id);
 }

@@ -36,6 +36,11 @@ public class TaskRest implements ITaskRest {
         return taskService.getAllTasks();
     }
 
+    @Override
+    public Task findByIdTask(@PathVariable String id) {
+        return taskService.findByIdTask(id);
+    }
+
     public void setTaskService(TaskService taskService) {
         this.taskService = taskService;
     }

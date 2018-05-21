@@ -15,4 +15,6 @@ public interface ITaskService {
     void modifyToDO( Task task, String id);
 
     List<Task> getAllTasks();
+
+    Task findByIdTask(String id);
 }
