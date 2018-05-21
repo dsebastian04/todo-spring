@@ -1,6 +1,8 @@
 package com.project.todo.tasks.document;
 
-import com.project.todo.tasks.Enum.State;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.todo.tasks.params.State;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
@@ -11,7 +13,7 @@ public class Task {
      * Id of the task
      */
     @Id
-    private String id ;
+    private String id;
 
     /**
      * task to do
@@ -27,18 +29,19 @@ public class Task {
     /**
      * Creation Date of the task
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dateInsert;
 
     /**
      * modification of the Date of the task
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dateModify;
 
     /**
      * User who created the task
      */
     private User user;
-
 
 
     public String getId() {
