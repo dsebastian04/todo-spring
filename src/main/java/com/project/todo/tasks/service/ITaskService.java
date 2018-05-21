@@ -9,4 +9,6 @@ public interface ITaskService {
     void createTask(Task task);
 
     void switchStatus(String id);
+
+    void modifyToDO( Task task, String id);
 }

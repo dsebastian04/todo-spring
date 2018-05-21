@@ -24,6 +24,11 @@ public class TaskRest implements ITaskRest {
         taskService.switchStatus(id);
     }
 
+    @Override
+    public void modifyToDO(@RequestBody Task task,@PathVariable String id) {
+        taskService.modifyToDO(task, id);
+    }
+
     public void setTaskService(TaskService taskService) {
         this.taskService = taskService;
     }

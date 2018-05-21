@@ -7,9 +7,7 @@ import com.project.todo.tasks.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 public class TaskService implements ITaskService {
@@ -38,6 +36,20 @@ public class TaskService implements ITaskService {
 
             task.setDateModify(LocalDate.now());
             taskRepository.save(task);
+        }
+    }
+
+    @Override
+    public void modifyToDO(Task task, String id) {
+        Task lTask = taskRepository.findOne(id);
+        if (lTask != null) {
+            if (task.getTodo() != null) {
+                lTask.setTodo(task.getTodo());
+            } else {
+                task.setTodo("");
+            }
+            task.setDateModify(LocalDate.now());
+            taskRepository.save(lTask);
         }
     }
 

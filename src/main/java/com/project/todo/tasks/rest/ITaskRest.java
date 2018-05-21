@@ -11,4 +11,8 @@ public interface ITaskRest {
 
     @PatchMapping(path = "/{id}/status")
     void switchStatus(@PathVariable String id);
+
+    @PatchMapping(path = "/{id}/todo")
+    void modifyToDO(@RequestBody Task task, @PathVariable String id);
+
 }
