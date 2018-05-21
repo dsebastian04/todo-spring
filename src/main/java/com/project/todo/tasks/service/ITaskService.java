@@ -12,9 +12,11 @@ public interface ITaskService {
 
     void switchStatus(String id);
 
-    void modifyToDO( Task task, String id);
+    void modifyToDO(Task task, String id);
 
     List<Task> getAllTasks();
 
     Task findByIdTask(String id);
+
+    Task findByUserNickname(String user);
 }

@@ -22,4 +22,7 @@ public interface ITaskRest {
 
     @GetMapping(path = "/{id}")
     Task findByIdTask(@PathVariable String id);
+
+    @GetMapping(path ="nickname/{user}")
+    Task findByUserNickname(@PathVariable String user);
 }

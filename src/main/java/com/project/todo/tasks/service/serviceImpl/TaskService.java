@@ -64,6 +64,11 @@ public class TaskService implements ITaskService {
         return taskRepository.findOne(id);
     }
 
+    @Override
+    public Task findByUserNickname(String user) {
+        return taskRepository.findByUser_Nickname(user);
+    }
+
     public void setTaskRepository(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
