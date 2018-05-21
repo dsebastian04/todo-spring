@@ -1,6 +1,6 @@
 package com.project.todo.tasks.params;
 
-public enum State {
+public enum TaskState {
     Active,
     Finish
 }
