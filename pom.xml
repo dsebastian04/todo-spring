@@ -5,7 +5,7 @@
 
     <groupId>com.project.todo</groupId>
     <artifactId>tasks</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>tasks</name>
@@ -60,6 +60,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <defaultGoal>package</defaultGoal>
     </build>
 
 

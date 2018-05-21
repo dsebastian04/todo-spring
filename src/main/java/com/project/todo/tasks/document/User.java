@@ -5,13 +5,13 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 public class User {
 
-        @Id
-        public String nickname;
+    @Id
+    public String nickname;
 
-        @Field
-        public String name;
+    @Field
+    public String name;
 
-        public String getNickname() {
+    public String getNickname() {
         return nickname;
     }
 

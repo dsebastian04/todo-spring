@@ -27,7 +27,7 @@ public class TaskRest implements ITaskRest {
     }
 
     @Override
-    public void modifyToDO(@RequestBody Task task,@PathVariable String id) {
+    public void modifyToDO(@RequestBody Task task, @PathVariable String id) {
         taskService.modifyToDO(task, id);
     }
 
