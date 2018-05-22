@@ -25,4 +25,7 @@ public interface ITaskRest {
 
     @GetMapping(path = "nickname/{user}")
     Task findByUserNickname(@PathVariable String user);
+
+    @DeleteMapping(path ="/{id}")
+    void deleteTaskById(@PathVariable String id);
 }

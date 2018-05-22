@@ -13,8 +13,12 @@ import java.util.List;
 @Service
 public class TaskService implements ITaskService {
 
-    @Autowired
+
     private TaskRepository taskRepository;
+
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
     @Override
     public void createTask(Task task) {
@@ -67,6 +71,11 @@ public class TaskService implements ITaskService {
     @Override
     public Task findByUserNickname(String user) {
         return taskRepository.findByUser_Nickname(user);
+    }
+
+    @Override
+    public void deleteTaskById(String id) {
+        taskRepository.delete(id);
     }
 
     public void setTaskRepository(TaskRepository taskRepository) {
