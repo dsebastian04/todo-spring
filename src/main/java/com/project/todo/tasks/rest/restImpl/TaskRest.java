@@ -13,8 +13,11 @@ import java.util.List;
 @RestController
 public class TaskRest implements ITaskRest {
 
-    @Autowired
     private TaskService taskService;
+
+    public TaskRest(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @Override
     public void createTask(@RequestBody Task task) {
@@ -44,6 +47,11 @@ public class TaskRest implements ITaskRest {
     @Override
     public Task findByUserNickname(@PathVariable String user) {
         return taskService.findByUserNickname(user);
+    }
+
+    @Override
+    public void deleteTaskById(@PathVariable String id) {
+        taskService.deleteTaskById(id);
     }
 
     public void setTaskService(TaskService taskService) {

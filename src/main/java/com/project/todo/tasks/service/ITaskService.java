@@ -19,4 +19,7 @@ public interface ITaskService {
     Task findByIdTask(String id);
 
     Task findByUserNickname(String user);
+
+    void deleteTaskById(String id);
+
 }
