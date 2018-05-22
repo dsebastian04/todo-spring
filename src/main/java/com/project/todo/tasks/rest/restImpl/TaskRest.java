@@ -50,7 +50,7 @@ public class TaskRest implements ITaskRest {
     }
 
     @Override
-    public void deleteTaskById(String id) {
+    public void deleteTaskById(@PathVariable String id) {
         taskService.deleteTaskById(id);
     }
 
