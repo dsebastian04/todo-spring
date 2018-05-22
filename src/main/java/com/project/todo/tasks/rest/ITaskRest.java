@@ -28,4 +28,7 @@ public interface ITaskRest {
 
     @DeleteMapping(path ="/{id}")
     void deleteTaskById(@PathVariable String id);
+
+    @PutMapping("/{id}")
+    void updateTask(@RequestBody Task task);
 }

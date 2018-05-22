@@ -54,6 +54,11 @@ public class TaskRest implements ITaskRest {
         taskService.deleteTaskById(id);
     }
 
+    @Override
+    public void updateTask(@RequestBody Task task) {
+        taskService.updateTask(task);
+    }
+
     public void setTaskService(TaskService taskService) {
         this.taskService = taskService;
     }

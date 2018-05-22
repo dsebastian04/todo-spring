@@ -22,4 +22,6 @@ public interface ITaskService {
 
     void deleteTaskById(String id);
 
+    void updateTask(Task task);
+
 }

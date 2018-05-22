@@ -78,6 +78,11 @@ public class TaskService implements ITaskService {
         taskRepository.delete(id);
     }
 
+    @Override
+    public void updateTask(Task task) {
+        taskRepository.save(task);
+    }
+
     public void setTaskRepository(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
