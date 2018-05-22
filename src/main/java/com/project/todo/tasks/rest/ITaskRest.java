@@ -30,5 +30,5 @@ public interface ITaskRest {
     void deleteTaskById(@PathVariable String id);
 
     @PutMapping("/{id}")
-    void updateTask(@RequestBody Task task);
+    void updateTask(@RequestBody Task task,@PathVariable String id);
 }

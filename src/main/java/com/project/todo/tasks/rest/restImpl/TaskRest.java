@@ -55,7 +55,7 @@ public class TaskRest implements ITaskRest {
     }
 
     @Override
-    public void updateTask(@RequestBody Task task) {
+    public void updateTask(@RequestBody Task task,@PathVariable String id) {
         taskService.updateTask(task);
     }
 
