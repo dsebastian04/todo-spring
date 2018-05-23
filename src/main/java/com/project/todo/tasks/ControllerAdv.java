@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 @ControllerAdvice
 public class ControllerAdv extends ResponseEntityExceptionHandler {
@@ -27,9 +28,11 @@ public class ControllerAdv extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex,getApiError(ex,status), headers, status, request);
     }
 
+    
+
     private ApiError getApiError(final Exception ex, final HttpStatus httpStatus){
     final String message = ex.getMessage() == null ? ex.getClass().getSimpleName() :ex.getMessage();
-    final String devMessage = ex.getClass().getSimpleName();
+    final String devMessage = ExceptionUtils.getRootCauseMessage(ex);
 
     return new ApiError(httpStatus.value(),message,devMessage);
     }
