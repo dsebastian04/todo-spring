@@ -5,6 +5,7 @@ import com.project.todo.tasks.params.TaskState;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Task {
 
@@ -42,6 +43,17 @@ public class Task {
      */
     private User user;
 
+    public Task() {
+    }
+
+    public Task(String id, String todo, TaskState state, LocalDate dateInsert, LocalDate dateModify, User user) {
+        this.id = id;
+        this.todo = todo;
+        this.state = state;
+        this.dateInsert = dateInsert;
+        this.dateModify = dateModify;
+        this.user = user;
+    }
 
     public String getId() {
         return id;
@@ -89,5 +101,24 @@ public class Task {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equals(id, task.id) &&
+                Objects.equals(todo, task.todo) &&
+                state == task.state &&
+                Objects.equals(dateInsert, task.dateInsert) &&
+                Objects.equals(dateModify, task.dateModify) &&
+                Objects.equals(user, task.user);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, todo, state, dateInsert, dateModify, user);
     }
 }
