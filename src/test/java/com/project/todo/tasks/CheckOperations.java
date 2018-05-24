@@ -9,9 +9,9 @@ import com.project.todo.tasks.document.Task;
 import com.project.todo.tasks.document.User;
 import com.project.todo.tasks.params.TaskState;
 import org.apache.tomcat.jni.Local;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -25,9 +25,11 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {MongoConfiguration.class,TasksApplication.class},loader = AnnotationConfigContextLoader.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CheckOperations {
+
     @Test
-    public void whenCreateTask_thenCanRetrieveSameTask(){
+    public void testAWhenCreateTask_thenCanRetrieveSameTask(){
         final String url = "http://localhost:8081/tasks";
         final Task task = new Task("1","run the test",TaskState.Active,LocalDate.now(),null,new User("testU","test"));
         final RequestSpecification postSpecification = RestAssured.given();
@@ -39,7 +41,7 @@ public class CheckOperations {
     }
 
     @Test
-    public void whenPatchStatusTask_thenCanReviewTheStatusChange(){
+    public void testBWhenPatchStatusTask_thenCanReviewTheStatusChange(){
 
         final String url = "http://localhost:8081/tasks/1";
 
@@ -57,7 +59,7 @@ public class CheckOperations {
     }
 
     @Test
-    public void whenPatchToDOTask_thenCanReviewToDoChange(){
+    public void testCWhenPatchToDOTask_thenCanReviewToDoChange(){
 
         final String url = "http://localhost:8081/tasks/1";
 
@@ -75,7 +77,7 @@ public class CheckOperations {
     }
 
     @Test
-    public void whenPutTask_thenCanReviewChange(){
+    public void testDWhenPutTask_thenCanReviewChange(){
 
         final String url = "http://localhost:8081/tasks/1";
 
@@ -91,14 +93,14 @@ public class CheckOperations {
         put.body(taskPut).contentType(ContentType.JSON).put(url);
 
         final RequestSpecification readTwo = RestAssured.given();
-        final Task taskModify = readTwo.accept(ContentType.JSON).get(url).as(Task.class);
+        final Task taskModify = readTwo.contentType(ContentType.JSON).get(url).as(Task.class);
 
 
         Assert.assertThat(taskPut, equalTo(taskModify));
     }
 
     @Test
-    public void whenDeletetTask_thenCantRetrieveSameTask(){
+    public void testEWhenDeleteTask_thenCantRetrieveSameTask(){
 
         final String url = "http://localhost:8081/tasks/1";
 

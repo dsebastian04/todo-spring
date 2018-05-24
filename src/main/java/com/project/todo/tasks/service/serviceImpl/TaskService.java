@@ -53,7 +53,7 @@ public class TaskService implements ITaskService {
             } else {
                 task.setTodo("");
             }
-            task.setDateModify(LocalDate.now());
+            lTask.setDateModify(LocalDate.now());
             taskRepository.save(lTask);
         }
     }
