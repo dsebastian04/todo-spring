@@ -8,9 +8,9 @@ import java.util.List;
 public interface ITaskService {
 
 
-    void createTask(Task task);
+    Task createTask(Task task);
 
-    void switchStatus(String id);
+    Task switchStatus(String id);
 
     void modifyToDO(Task task, String id);
 

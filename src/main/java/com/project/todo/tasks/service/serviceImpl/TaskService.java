@@ -21,13 +21,16 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public void createTask(Task task) {
-        taskRepository.save(task);
+    public Task createTask(Task task) {
+        Task t = taskRepository.save(task);
+        t.setId(t.getId() + "00");
+        return t;
     }
 
     @Override
-    public void switchStatus(String id) {
+    public Task switchStatus(String id) {
         Task task = taskRepository.findOne(id);
+        Task result = null;
         if (task != null) {
             if (task.getState() != null) {
                 if (task.getState().equals(TaskState.Active)) {
@@ -40,8 +43,9 @@ public class TaskService implements ITaskService {
             }
 
             task.setDateModify(LocalDate.now());
-            taskRepository.save(task);
+            result = taskRepository.save(task);
         }
+        return result;
     }
 
     @Override
