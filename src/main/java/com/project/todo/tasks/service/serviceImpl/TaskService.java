@@ -49,8 +49,9 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public void modifyToDO(Task task, String id) {
+    public Task modifyToDO(Task task, String id) {
         Task lTask = taskRepository.findOne(id);
+        Task result = null;
         if (lTask != null) {
             if (task.getTodo() != null) {
                 lTask.setTodo(task.getTodo());
@@ -58,8 +59,9 @@ public class TaskService implements ITaskService {
                 task.setTodo("");
             }
             lTask.setDateModify(LocalDate.now());
-            taskRepository.save(lTask);
+             result = taskRepository.save(lTask);
         }
+        return result;
     }
 
     @Override
@@ -73,7 +75,7 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public Task findByUserNickname(String user) {
+    public List<Task> findByUserNickname(String user) {
         return taskRepository.findByUser_Nickname(user);
     }
 
@@ -83,11 +85,8 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public void updateTask(Task task) {
-        taskRepository.save(task);
-    }
-
-    public void setTaskRepository(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    public Task updateTask(Task task) {
+        task.setDateModify(LocalDate.now());
+        return taskRepository.save(task);
     }
 }

@@ -20,18 +20,18 @@ public class TaskRest implements ITaskRest {
     }
 
     @Override
-    public void createTask(@RequestBody Task task) {
-        taskService.createTask(task);
+    public Task createTask(@RequestBody Task task) {
+        return taskService.createTask(task);
     }
 
     @Override
-    public void switchStatus(@PathVariable String id) {
-        taskService.switchStatus(id);
+    public Task switchStatus(@PathVariable String id) {
+        return taskService.switchStatus(id);
     }
 
     @Override
-    public void modifyToDO(@RequestBody Task task, @PathVariable String id) {
-        taskService.modifyToDO(task, id);
+    public Task modifyToDO(@RequestBody Task task, @PathVariable String id) {
+        return taskService.modifyToDO(task, id);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class TaskRest implements ITaskRest {
     }
 
     @Override
-    public Task findByUserNickname(@PathVariable String user) {
+    public List<Task> findByUserNickname(@PathVariable String user) {
         return taskService.findByUserNickname(user);
     }
 
@@ -55,11 +55,8 @@ public class TaskRest implements ITaskRest {
     }
 
     @Override
-    public void updateTask(@RequestBody Task task,@PathVariable String id) {
-        taskService.updateTask(task);
+    public Task updateTask(@RequestBody Task task, @PathVariable String id) {
+        return taskService.updateTask(task);
     }
 
-    public void setTaskService(TaskService taskService) {
-        this.taskService = taskService;
-    }
 }

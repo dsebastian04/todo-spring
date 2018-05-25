@@ -11,15 +11,15 @@ public interface ITaskRest {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void createTask(@RequestBody Task task);
+    Task createTask(@RequestBody Task task);
 
     @PatchMapping(path = "/{id}/status")
     @ResponseStatus(HttpStatus.OK)
-    void switchStatus(@PathVariable String id);
+    Task switchStatus(@PathVariable String id);
 
     @PatchMapping(path = "/{id}/todo")
     @ResponseStatus(HttpStatus.OK)
-    void modifyToDO(@RequestBody Task task, @PathVariable String id);
+    Task modifyToDO(@RequestBody Task task, @PathVariable String id);
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -31,7 +31,7 @@ public interface ITaskRest {
 
     @GetMapping(path = "nickname/{user}")
     @ResponseStatus(HttpStatus.OK)
-    Task findByUserNickname(@PathVariable String user);
+    List<Task> findByUserNickname(@PathVariable String user);
 
     @DeleteMapping(path ="/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -39,5 +39,5 @@ public interface ITaskRest {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    void updateTask(@RequestBody Task task,@PathVariable String id);
+    Task updateTask(@RequestBody Task task,@PathVariable String id);
 }

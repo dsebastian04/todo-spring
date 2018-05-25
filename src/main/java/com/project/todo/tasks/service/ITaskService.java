@@ -12,16 +12,16 @@ public interface ITaskService {
 
     Task switchStatus(String id);
 
-    void modifyToDO(Task task, String id);
+    Task modifyToDO(Task task, String id);
 
     List<Task> getAllTasks();
 
     Task findByIdTask(String id);
 
-    Task findByUserNickname(String user);
+    List<Task> findByUserNickname(String user);
 
     void deleteTaskById(String id);
 
-    void updateTask(Task task);
+    Task updateTask(Task task);
 
 }
