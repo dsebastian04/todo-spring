@@ -1,5 +1,6 @@
 package com.project.todo.tasks.service.serviceImpl;
 
+import com.project.todo.tasks.Exception.TaskNotFoundException;
 import com.project.todo.tasks.document.Task;
 import com.project.todo.tasks.document.User;
 import com.project.todo.tasks.params.TaskState;
@@ -40,7 +41,7 @@ public class TaskServiceTest {
         Task t = taskService.createTask(task);
 
         assertNotNull(t);
-        assertEquals("100", t.getId());
+        assertEquals(task, t);
     }
 
     @Test
@@ -80,8 +81,18 @@ public class TaskServiceTest {
 
     }
 
+    @Test(expected = TaskNotFoundException.class)
+    public void switchStatus_whenTaskIsNull() {
+        final Task task = null;
+        Mockito.when(taskRepository.findOne("1")).thenReturn(task);
+
+        Task t = taskService.switchStatus("1");
+
+
+    }
+
     @Test
-    public void modifyToDOWhenIsSetTheTask() {
+    public void modifyToDO_WhenIsSetTheTodo() {
         final Task task = new Task("4", "modify the test", TaskState.Active, LocalDate.now(), null, new User("testU", "test"));
         Mockito.when(taskRepository.findOne(task.getId())).thenReturn(task);
         Mockito.when(taskRepository.save(task)).thenReturn(task);
@@ -92,8 +103,17 @@ public class TaskServiceTest {
 
     }
 
+    @Test(expected = TaskNotFoundException.class)
+    public void modifyToDO_WhenIsNullTodo() {
+        final Task task = null;
+        Mockito.when(taskRepository.findOne("1")).thenReturn(task);
+
+        Task t = taskService.modifyToDO(task, "5");
+
+    }
+
     @Test
-    public void modifyToDOWhenIsNullTheTask() {
+    public void modifyToDOWhenIsNullTodo() {
         final Task task = new Task("5", null, TaskState.Active, LocalDate.now(), null, new User("testU", "test"));
         Mockito.when(taskRepository.findOne(task.getId())).thenReturn(task);
         Mockito.when(taskRepository.save(task)).thenReturn(task);
@@ -134,6 +154,16 @@ public class TaskServiceTest {
         assertEquals(task, taskRetrieve);
     }
 
+    @Test(expected = TaskNotFoundException.class)
+    public void findByIdTask_whenTaskIsNull() {
+        final Task task = null;
+
+        Mockito.when(taskRepository.findOne("8")).thenReturn(task);
+
+        final Task taskRetrieve = taskService.findByIdTask("8");
+
+    }
+
     @Test
     public void findByUserNickname() {
         final Task task = new Task("9", null, TaskState.Active, LocalDate.now(), null, new User("testU", "test"));
@@ -147,6 +177,17 @@ public class TaskServiceTest {
         assertEquals(tasks, taskRetrieve);
     }
 
+    @Test(expected = TaskNotFoundException.class)
+    public void findByUserNickname_whenNotFoundTasks() {
+
+        final List<Task> tasks = new ArrayList<>();
+
+        Mockito.when(taskRepository.findByUser_Nickname("user")).thenReturn(tasks);
+
+        final List<Task> taskRetrieve = taskService.findByUserNickname("user");
+
+
+    }
 
     @Test
     public void deleteTaskById() {
