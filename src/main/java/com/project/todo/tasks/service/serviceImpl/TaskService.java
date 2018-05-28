@@ -6,6 +6,7 @@ import com.project.todo.tasks.params.TaskState;
 import com.project.todo.tasks.preconditions.TaskConditions;
 import com.project.todo.tasks.repository.TaskRepository;
 import com.project.todo.tasks.service.ITaskService;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,7 +24,9 @@ public class TaskService implements ITaskService {
 
     @Override
     public Task createTask(Task task) {
-        Task t = taskRepository.save(task);
+        Task t = null;
+            t = taskRepository.insert(task);
+
         return t;
     }
 
@@ -68,7 +71,9 @@ public class TaskService implements ITaskService {
 
     @Override
     public List<Task> getAllTasks() {
-        return taskRepository.findAll();
+        List<Task> all = taskRepository.findAll();
+        TaskConditions.exist(all);
+        return all;
     }
 
     @Override

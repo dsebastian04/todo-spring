@@ -36,7 +36,7 @@ public class TaskServiceTest {
     public void createTask() {
         final Task task = new Task("1", "run the test", TaskState.Active, LocalDate.now(), null, new User("testU", "test"));
 
-        Mockito.when(taskRepository.save(task)).thenReturn(task);
+        Mockito.when(taskRepository.insert(task)).thenReturn(task);
 
         Task t = taskService.createTask(task);
 

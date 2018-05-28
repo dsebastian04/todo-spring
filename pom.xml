@@ -95,7 +95,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <defaultGoal>install</defaultGoal>
+        <defaultGoal>package</defaultGoal>
     </build>
 
 
