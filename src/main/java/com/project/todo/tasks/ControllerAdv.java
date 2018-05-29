@@ -14,10 +14,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ControllerAdv extends ResponseEntityExceptionHandler {
 
     public ControllerAdv() {
@@ -26,17 +28,22 @@ public class ControllerAdv extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return handleExceptionInternal(ex,"{\"message\": \"The Body message is mal formed, please contact support\"}", headers, status, request);
+        return handleExceptionInternal(ex,new ErrorMessage("The Body message is mal formed, please contact support",status,status.value()), headers, status, request);
     }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return handleExceptionInternal(ex,"The method argument isn't valid, please verify", headers, status, request);
+        return handleExceptionInternal(ex, new ErrorMessage("The method argument isn't valid, please verify",status,status.value()), headers, status, request);
     }
 
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return handleExceptionInternal(ex,"The request isn't support, please verify", headers, status, request);
+        return handleExceptionInternal(ex,new ErrorMessage("The request isn't support, please verify",status,status.value()), headers, status, request);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        return handleExceptionInternal(ex,new ErrorMessage("The URI doesn't exist, please verify",status,status.value()),new HttpHeaders(),status , request);
     }
 
     @ExceptionHandler(value = TaskNotFoundException.class)
