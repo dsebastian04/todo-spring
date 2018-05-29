@@ -15,15 +15,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 public class TasksApplication {
 
-    @Autowired
-    private DispatcherServlet servlet;
+
 
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(TasksApplication.class, args);
     }
-    @Bean
-    public CommandLineRunner getCommandLineRunner(ApplicationContext context) {
-        servlet.setThrowExceptionIfNoHandlerFound(true);
-        return args -> {};
-    }
+
 }

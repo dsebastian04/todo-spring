@@ -2,13 +2,18 @@ package com.project.todo.tasks.Exception;
 
 import org.springframework.http.HttpStatus;
 
+import java.util.Objects;
+
 public class ErrorMessage {
 
     private String content;
     private HttpStatus status;
     private int statusCode;
 
-    public ErrorMessage(String content, HttpStatus status,int statusCode) {
+    public ErrorMessage() {
+    }
+
+    public ErrorMessage(String content, HttpStatus status, int statusCode) {
         this.content = content;
         this.status = status;
         this.statusCode = statusCode;
@@ -36,5 +41,21 @@ public class ErrorMessage {
 
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ErrorMessage that = (ErrorMessage) o;
+        return statusCode == that.statusCode &&
+                Objects.equals(content, that.content) &&
+                status == that.status;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(content, status, statusCode);
     }
 }
