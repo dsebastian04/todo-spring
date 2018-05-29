@@ -6,7 +6,6 @@ import com.project.todo.tasks.params.TaskState;
 import com.project.todo.tasks.preconditions.TaskConditions;
 import com.project.todo.tasks.repository.TaskRepository;
 import com.project.todo.tasks.service.ITaskService;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,13 +24,13 @@ public class TaskService implements ITaskService {
     @Override
     public Task createTask(Task task) {
         Task t = null;
-            t = taskRepository.insert(task);
+        t = taskRepository.insert(task);
 
         return t;
     }
 
     @Override
-    public Task switchStatus(String id) throws TaskNotFoundException{
+    public Task switchStatus(String id) throws TaskNotFoundException {
         Task task = taskRepository.findOne(id);
         TaskConditions.exist(task);
         Task result = null;
@@ -53,7 +52,7 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public Task modifyToDO(Task task, String id) throws TaskNotFoundException{
+    public Task modifyToDO(Task task, String id) throws TaskNotFoundException {
         Task lTask = taskRepository.findOne(id);
         TaskConditions.exist(lTask);
         Task result = null;
@@ -64,7 +63,7 @@ public class TaskService implements ITaskService {
                 task.setTodo("");
             }
             lTask.setDateModify(LocalDate.now());
-             result = taskRepository.save(lTask);
+            result = taskRepository.save(lTask);
         }
         return result;
     }

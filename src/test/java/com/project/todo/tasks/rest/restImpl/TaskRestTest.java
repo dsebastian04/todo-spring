@@ -4,20 +4,19 @@ import com.project.todo.tasks.document.Task;
 import com.project.todo.tasks.document.User;
 import com.project.todo.tasks.params.TaskState;
 import com.project.todo.tasks.service.serviceImpl.TaskService;
-import org.apache.tomcat.jni.Local;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.internal.configuration.injection.MockInjection;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class TaskRestTest {
 
@@ -40,7 +39,7 @@ public class TaskRestTest {
         Task taskRetrieve = taskRest.createTask(task);
 
         assertNotNull(taskRetrieve);
-        assertEquals(task,taskRetrieve);
+        assertEquals(task, taskRetrieve);
     }
 
     @Test
@@ -51,18 +50,18 @@ public class TaskRestTest {
         Task taskRetrieve = taskRest.switchStatus(task.getId());
 
         assertNotNull(taskRetrieve);
-        assertEquals(task,taskRetrieve);
+        assertEquals(task, taskRetrieve);
     }
 
     @Test
     public void modifyToDO() {
         final Task task = new Task("1", "run the test", TaskState.Active, LocalDate.now(), null, new User("testU", "test"));
 
-        Mockito.when(taskRest.modifyToDO(task,task.getId())).thenReturn(task);
-        Task taskRetrieve = taskRest.modifyToDO(task,task.getId());
+        Mockito.when(taskRest.modifyToDO(task, task.getId())).thenReturn(task);
+        Task taskRetrieve = taskRest.modifyToDO(task, task.getId());
 
         assertNotNull(taskRetrieve);
-        assertEquals(task,taskRetrieve);
+        assertEquals(task, taskRetrieve);
     }
 
     @Test
@@ -79,7 +78,7 @@ public class TaskRestTest {
         final List tasksRetrieve = taskRest.getAllTasks();
 
         assertNotNull(tasks);
-        assertEquals(tasks,tasksRetrieve);
+        assertEquals(tasks, tasksRetrieve);
     }
 
     @Test
@@ -90,7 +89,7 @@ public class TaskRestTest {
         Task taskRetrieve = taskRest.findByIdTask(task.getId());
 
         assertNotNull(taskRetrieve);
-        assertEquals(task.getId(),taskRetrieve.getId());
+        assertEquals(task.getId(), taskRetrieve.getId());
     }
 
     @Test
@@ -102,7 +101,7 @@ public class TaskRestTest {
         List<Task> taskRetrieve = taskRest.findByUserNickname(task.getUser().getNickname());
 
         assertNotNull(taskRetrieve);
-        assertEquals(tasks,taskRetrieve);
+        assertEquals(tasks, taskRetrieve);
     }
 
     @Test
@@ -113,17 +112,17 @@ public class TaskRestTest {
 
         taskRest.deleteTaskById(task.getId());
 
-        Mockito.verify(service,Mockito.times(1)).deleteTaskById(task.getId());
+        Mockito.verify(service, Mockito.times(1)).deleteTaskById(task.getId());
     }
 
     @Test
     public void updateTask() {
         final Task task = new Task("1", "run the test", TaskState.Active, LocalDate.now(), null, new User("testU", "test"));
 
-        Mockito.when(taskRest.updateTask(task,task.getId())).thenReturn(task);
-        Task taskRetrieve = taskRest.updateTask(task,task.getId());
+        Mockito.when(taskRest.updateTask(task, task.getId())).thenReturn(task);
+        Task taskRetrieve = taskRest.updateTask(task, task.getId());
 
         assertNotNull(taskRetrieve);
-        assertEquals(task,taskRetrieve);
+        assertEquals(task, taskRetrieve);
     }
 }

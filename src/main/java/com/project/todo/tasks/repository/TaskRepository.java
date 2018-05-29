@@ -11,6 +11,7 @@ public interface TaskRepository extends MongoRepository<Task, String> {
 
     /**
      * Returns all instances that match with the user nickname.
+     *
      * @param user nickname of the user
      * @return List tasks of the user
      */

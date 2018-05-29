@@ -2,6 +2,7 @@ package com.project.todo.tasks.preconditions;
 
 import com.project.todo.tasks.Exception.TaskNotFoundException;
 import com.project.todo.tasks.document.Task;
+
 import java.util.List;
 
 public class TaskConditions {
@@ -13,7 +14,7 @@ public class TaskConditions {
     }
 
     public static void exist(List<Task> list) {
-        if (list.isEmpty() ){
+        if (list.isEmpty()) {
             throw new TaskNotFoundException();
         }
 

@@ -5,18 +5,16 @@ import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.project.todo.tasks.Exception.ErrorMessage;
-import com.project.todo.tasks.configuration.MongoConfiguration;
 import com.project.todo.tasks.document.Task;
 import com.project.todo.tasks.document.User;
 import com.project.todo.tasks.params.TaskState;
-import org.apache.tomcat.jni.Local;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -111,7 +109,7 @@ public class CheckOperations {
         final RequestSpecification readTwo = RestAssured.given();
         final ErrorMessage taskModify = readTwo.contentType(ContentType.JSON).get(url).as(ErrorMessage.class);
 
-        final ErrorMessage result = new ErrorMessage("The task doesn't exist, please verify",HttpStatus.NOT_FOUND,HttpStatus.NOT_FOUND.value());
+        final ErrorMessage result = new ErrorMessage("The task doesn't exist, please verify", HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND.value());
 
         Assert.assertThat(result, equalTo(taskModify));
     }

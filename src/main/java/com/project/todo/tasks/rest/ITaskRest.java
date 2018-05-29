@@ -33,11 +33,11 @@ public interface ITaskRest {
     @ResponseStatus(HttpStatus.OK)
     List<Task> findByUserNickname(@PathVariable String user);
 
-    @DeleteMapping(path ="/{id}")
+    @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteTaskById(@PathVariable String id);
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    Task updateTask(@RequestBody Task task,@PathVariable String id);
+    Task updateTask(@RequestBody Task task, @PathVariable String id);
 }
