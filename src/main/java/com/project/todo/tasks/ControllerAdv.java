@@ -1,6 +1,7 @@
 package com.project.todo.tasks;
 
 import com.project.todo.tasks.Exception.ErrorMessage;
+import com.project.todo.tasks.Exception.MyUserAuthNotFound;
 import com.project.todo.tasks.Exception.TaskNotFoundException;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.dao.DuplicateKeyException;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -65,5 +68,14 @@ public class ControllerAdv extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(ex, new ErrorMessage("Please apologize us, we have some troubles. O.O' ", status, status.value()), new HttpHeaders(), status, request);
     }
+
+
+    @ExceptionHandler(value = {MyUserAuthNotFound.class})
+    public ResponseEntity<Object> handleUserAuthNotExist(final RuntimeException ex, final WebRequest request) {
+        final HttpStatus status = HttpStatus.UNAUTHORIZED;
+
+        return handleExceptionInternal(ex, new ErrorMessage("The User doesn't exist please review your auth ", status, status.value()), new HttpHeaders(), status, request);
+    }
+
 
 }
